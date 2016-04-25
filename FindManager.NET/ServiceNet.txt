@@ -1,0 +1,70 @@
+property String^ Name {String^ get();}
+Gets name of action.
+
+property int ArgumentCount {int get();}
+Gets number of action's input and output arguments.
+
+property int ArgumentInCount {int get();}
+Gets number of action's input arguments.
+
+property List<String^>^ ArgumentsIn {void set(List<String^>^);}
+Sets input arguments.
+
+property String^ Argument[int] {void set(int index, String^ argValue);}
+Sets input argument at specified index in array of input arguments.
+
+property ArgsList^ Arguments {ArgsList^ get();}
+Gets input arguments.
+
+property List<ArgsList^>^ Info {List<ArgsList^>^ get();}
+Gets action's properties.
+
+property ServiceNet^ ParentService {ServiceNet^ get();}
+Gets parent service object.
+
+
+int Invoke(ArgsList^% outArgs);
+Invokes this action on parent UPnP service. argsout	- array of values of output arguments and returned value or error message. On error argsout contains only error messages. Returns: -1 on error, >0 means number of output arguments + returned value (if any), -2 if argsout contains only returned value.
+
+
+
+
+property ActionNet^ Action[int] {ActionNet^ get(int index);}
+Gets action object at specified index in array of actions.
+
+property ActionNet^ Action[String^] {ActionNet^ get(String^ actionName);}
+Gets action object about specified name in array of actions.
+
+property int ActionsCount {int get();}
+Gets number of actions.
+
+property StateVarList^ StateVariables {StateVarList^ get();}
+Gets collection of state variables. Element of collection contains variable's name and boolean value indicating that variable sends events.
+
+property StringDictionary^ Info {StringDictionary^ get();}
+Gets service's properties.
+
+property String^ ServiceID {String^ get();}
+Gets service's name.
+
+property String^ ServiceTypeID {String^ get();}
+Gets service's type.
+
+property long LastTransportStatus {long get();}
+Gets status code of last action.
+
+property DeviceNet^ ParentDevice {DeviceNet^ get();}
+Gets parent device.
+
+property String^ ScpdURL {String^ get();}
+Gets URL of description document.
+
+virtual Collections::IEnumerator^ GetEnumerator();
+Returns enumerator for actions collection.
+
+array<ActionNet^>^ GetActions();
+Returns array of actions objects.
+
+String^ GetScpdContent();
+Returns content of description document.
+

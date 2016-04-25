@@ -1,0 +1,76 @@
+property String^ UniqueName {String^ get();}
+Returns Unique Device Name (UDN) of device.
+
+property String^ FriendlyName {String^ get();}
+Returns descriptive name of device.
+
+property String^ Type {String^ get();}
+Gets type of device.
+
+property DeviceNet^ ParentDevice {DeviceNet^ get();}
+Returns object of parent device. Null for root device.
+
+property DeviceNet^ RootDevice {DeviceNet^ get();}
+Returns parent of all devices in hierarchy.
+
+property bool IsRoot {bool get();}
+Checks if device is root device.
+
+property String^ DocumentURL {String^ get();}
+Gets URL of description document.
+
+property StringDictionary^ Info {StringDictionary^ get();}
+Gets properties of device.
+
+property DeviceNet^ Device[int] {DeviceNet^ get(int index);}
+Returns device at specified index in devices collection.
+
+property int DeviceCount {int get();}
+Gets number of devices in collection.
+
+property bool IsDeviceCollectionEmpty {bool get();}
+Checks if there are any devices in collection.
+
+property ServiceNet^ Service[int] {ServiceNet^ get(int index);}
+Returns service at specified index in collection of services.
+
+property int ServiceCount {int get();}
+Gets number of services in collection.
+
+property IconParamNet^ Icon[int] {IconParamNet^ get(int index);}
+Returns icon at specified index in collection of icons.
+
+property int IconCount {int get();}
+Gets number of icons in collection.
+
+property bool IsIconCollectionEmpty {bool get();}
+Checks if there are any icons in collection.
+
+property EnumSwitch EnumeratorSwitch {EnumSwitch get(); void set(EnumSwitch enumval);}
+Gets or sets the value of enum (one of: Devices, Services, Icons) indicating which collection (respectively devices or services or icons) will be enumerated with the help of enumerator obtained by GetEnumerator method.
+
+
+virtual Collections::IEnumerator^ GetEnumerator();
+Returns enumerator for collection which is indicated by the current value of EnumeratorSwitch property. Which collection is currently enumerated depends on enumerator switch.
+
+array<DeviceNet^>^ GetDevices();
+Returns array of devices objects.
+
+array<ServiceNet^>^ GetServices();
+Returns array of services objects.
+
+array<IconParamNet^>^ GetIcons();
+Returns array of icons objects.
+
+String^ GetDocumentContent();
+Returns content of description document.
+
+String^ GetIconURL(int width, int height, int depth);
+Returns URL of icon with specified parameters.
+
+void EnumerateDevices(Object^ param, int procid);
+Processes device structure and for each member device OnProcessDevice event is raised. Both arguments can be null.
+
+
+event ProcessDeviceEvent^ OnProcessDevice
+Raised for each member device while processing structure of root device with the help of EnumerateDevices method.

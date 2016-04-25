@@ -1,0 +1,69 @@
+FindManagerNet();
+Default constructor. Appropriate when COM library was initialized for use single threaded model.
+
+FindManagerNet(SynchronizationContext^ synContext);
+Use this constructor in GUI applications when COM library was initialized for use multi threaded model. In this case library's functions called by UPnP framework will be executed in separate threads. Thanks to that constructor events handlers executed in separate threads can safely access controls created in main GUI thread without the need to use InvokeRequired.
+
+bool Init(String^ deviceType);
+Initializes FindManager object and uses specified type of device while searching for devices. Returns true if succeeded.
+ 
+bool Init();
+Initializes FindManager object and uses "upnp:rootdevice" type of device while searching for devices. All basic types will be searched. Returns true if succeeded.
+
+bool Start();
+Starts searching. Returns true if succeeded.
+
+bool Stop();
+Cancels searching. Returns true if succeeded.
+
+virtual Collections::IEnumerator^ GetEnumerator();
+Returns enumerator for devices collection.
+
+array<DeviceNet^>^ GetCollection();
+Returns collection of detected devices.
+
+
+property DeviceNet^ Device[int] {DeviceNet^ get(int index);}
+Returns device object from collection at specified index.
+
+property int CollectionSize	{int get();}
+Gets number of devices in collection.
+
+property bool IsCollectionEmpty	{bool get();}
+Checks if there are any devices in collection.
+
+property long FindId {long get();}
+Gets search session identifier.
+
+static property int DeviceTypeCount {int get();}
+Gets number of names of devices types in array.
+
+static property array<String^>^ DeviceTypes {array<String^>^ get();}
+Returns array of names of devices types.
+
+static property String^ RootDeviceType {String^ get();}
+Gets name of basic type of device.
+
+static property String^ DeviceType[int] {String^ get(int index);}
+Gets name of type at specified index in array.
+
+
+event StartFindEvent^ OnStartFind
+Occurs when search for devices has been started.
+
+event StopFindEvent^ OnStopFind
+Occurs when search for devices has been cancelled.
+
+event AddDeviceEvent^ OnAddDevice
+Occurs when new device is added to collection.
+
+event RemoveDeviceEvent^ OnRemoveDevice
+Occurs when device is removed from collection.
+
+event ServiceVariableChangedEvent^ OnServiceVariableChanged
+Occurs when state variable's value has been changed.
+
+event ServiceInstanceDiedEvent^ OnServiceInstanceDied
+Occurs when service is not responding.
+
++static
